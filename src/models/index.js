@@ -1,9 +1,10 @@
 "use strict";
+require("dotenv").config();
 const pg = require("pg");
 
 const { Sequelize, DataTypes } = require("sequelize");
 
-const conString = "postgres://asura:0000@localhost:5432/test";
+const conString = process.env.CONSTRING
 
 pg.defaults.ssl = false;
 const sequelize = new Sequelize(conString, {
