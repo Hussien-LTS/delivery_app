@@ -10,7 +10,7 @@ const { validateAdmin } = require("../../middleware/validateAdmin");
 
 const employeeAuthRouter = require("express").Router();
 
-employeeAuthRouter.post("/registerEmp", httpSignUpEmpHandler);
+employeeAuthRouter.post("/registerEmp", existingUser,httpSignUpEmpHandler);
 
 employeeAuthRouter.post("/signInEmp", httpSignInEmpHandler);
 

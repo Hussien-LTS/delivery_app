@@ -51,71 +51,82 @@ const Subscriptions = require("./subscriptions.model")(sequelize, DataTypes);
 const Trips = require("./trips.model")(sequelize, DataTypes);
 
 
-// BuildingTypes 
-BuildingTypes.belongsTo(ClientLocations); // 1-1
-
-// ClientLocations
-ClientLocations.hasOne(BuildingTypes, { foreignKey: "building_types_Id" });
-ClientLocations.hasOne(Countries, { foreignKey: "country_Id" });
-ClientLocations.belongsTo(Clients); // 1-n
-
-// ClientPoints
-ClientPoints.belongsTo(Clients); // 1-n
-
-// Clients
-Clients.hasMany(ClientLocations, { foreignKey: "client_Id" });
-Clients.hasMany(ClientPoints, { foreignKey: "client_Id" });
-Clients.hasMany(Orders, { foreignKey: "order_Id" });
-Clients.hasMany(Rates, { foreignKey: "client_rate_Id" });
-
-//FIXME: 1-n or n-n ??
-// Clients.hasMany(PromoCoupons, { foreignKey: "promoCoupons_id" });
-
 // Countries
-Countries.hasMany(Regions, { foreignKey: "country_Id" });
-Countries.belongsTo(ClientLocations); // 1-1
-Countries.belongsTo(SalePoints); // 1-1
-
-// Discounts
-Discounts.hasMany(Products, { foreignKey: "discount_Id" });
-
-// Drivers
-Drivers.hasMany(Rates, { foreignKey: "driver_rate_Id" });
-Drivers.hasMany(Orders, { foreignKey: "driver_Id" });
-Drivers.belongsTo(SalePoints); // 1-n
-
-// EmployeeClassifications
-// EmployeeClassifications.hasMany(Permissions, { foreignKey: "permissions_Id" });
-
+// Regions
+// SalePoints
 // Employees
 
-// FoodClassifications
+// Countries.belongsTo(ClientLocations); // 1-1
 
-// Orders
-Orders.belongsTo(Clients); //1-n
-Orders.hasOne(Drivers, { foreignKey: "driver_Id" });
+Countries.hasMany(Regions);
+Regions.belongsTo(Countries); 
 
-// Permissions
+Countries.belongsTo(SalePoints);
+SalePoints.belongsTo(Countries); 
 
-// Products
-Products.belongsTo(Discounts); //1-n
+SalePoints.hasMany(Employees);
+Employees.belongsTo(SalePoints); 
 
-// ProductsNutritional_info
 
-// PromoCoupons
-//FIXME: 1-n or n-n ??
-// PromoCoupons.belongsTo(Clients, { foreignKey: "promoCoupons_id" });
+// // BuildingTypes 
+// BuildingTypes.belongsTo(ClientLocations); // 1-1
 
-// Rates
-Rates.belongsTo(Clients); //1-n
-Rates.belongsTo(Drivers); //1-n
+// // ClientLocations
+// ClientLocations.hasOne(BuildingTypes, { foreignKey: "building_types_Id" });
+// ClientLocations.hasOne(Countries, { foreignKey: "country_Id" });
+// ClientLocations.belongsTo(Clients); // 1-n
 
-// Regions
-Regions.belongsTo(Countries); //1-n
+// // ClientPoints
+// ClientPoints.belongsTo(Clients); // 1-n
 
-// SalePoints
-SalePoints.belongsTo(Countries); //1-1
-SalePoints.hasMany(Drivers, { foreignKey: "driver_Id" });
+// // Clients
+// Clients.hasMany(ClientLocations, { foreignKey: "client_Id" });
+// Clients.hasMany(ClientPoints, { foreignKey: "client_Id" });
+// Clients.hasMany(Orders, { foreignKey: "order_Id" });
+// Clients.hasMany(Rates, { foreignKey: "client_rate_Id" });
+
+// //FIXME: 1-n or n-n ??
+// // Clients.hasMany(PromoCoupons, { foreignKey: "promoCoupons_id" });
+
+
+// // Discounts
+// Discounts.hasMany(Products, { foreignKey: "discount_Id" });
+
+// // Drivers
+// Drivers.hasMany(Rates, { foreignKey: "driver_rate_Id" });
+// Drivers.hasMany(Orders, { foreignKey: "driver_Id" });
+// Drivers.belongsTo(SalePoints); // 1-n
+
+// // EmployeeClassifications
+// // EmployeeClassifications.hasMany(Permissions, { foreignKey: "permissions_Id" });
+
+// // Employees
+
+// // FoodClassifications
+
+// // Orders
+// Orders.belongsTo(Clients); //1-n
+// Orders.hasOne(Drivers, { foreignKey: "driver_Id" });
+
+// // Permissions
+
+// // Products
+// Products.belongsTo(Discounts); //1-n
+
+// // ProductsNutritional_info
+
+// // PromoCoupons
+// //FIXME: 1-n or n-n ??
+// // PromoCoupons.belongsTo(Clients, { foreignKey: "promoCoupons_id" });
+
+// // Rates
+// Rates.belongsTo(Clients); //1-n
+// Rates.belongsTo(Drivers); //1-n
+
+// // Regions
+
+// // SalePoints
+// SalePoints.hasMany(Drivers, { foreignKey: "driver_Id" });
 
 // Trips
 

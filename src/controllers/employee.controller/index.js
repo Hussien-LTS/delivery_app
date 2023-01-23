@@ -1,8 +1,9 @@
-const Employees = require("../../models").employees;
+const Employees = require("../../models").Employees;
 
 // GET EMPLOYEE PROFILE
 const httpGetEmpProfileHandler = async (req, res) => {
   try {
+
     const empProfile = await Employees.findOne({
       where: {
         id: req.params.id,
@@ -11,6 +12,7 @@ const httpGetEmpProfileHandler = async (req, res) => {
     if (!empProfile) {
       return res.status(404).send("No employee Profile found");
     }
+    console.log(empProfile.emp_token);
     return res.status(200).json(empProfile);
   } catch (error) {
     return res.status(500).json({ status: false, message: error.message });

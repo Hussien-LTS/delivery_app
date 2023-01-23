@@ -2,11 +2,11 @@
 
 module.exports = (sequelize, DataTypes) => {
   const Regions = sequelize.define("regions", {
-    region_name: {
+    city_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    country_Id: {
+    countryId: {
       type: DataTypes.INTEGER,
     },
   });

@@ -60,7 +60,6 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
 
-    // 1 -> n
     emp_classification_code: {
       type: DataTypes.INTEGER,
     },
@@ -73,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
       //   isIn: [["admin", "cashier", "employee"]],
       // },
       type: DataTypes.INTEGER,
-
+      allowNull: false,
     },
 
     emp_account_status: {
@@ -84,12 +83,11 @@ module.exports = (sequelize, DataTypes) => {
       //   isIn: [["0", "1"]],
       // },
       type: DataTypes.INTEGER,
-
+      allowNull: false, 
     },
 
     emp_token: {
       type: DataTypes.STRING,
-      default: "",
     },
   });
   return Employees;

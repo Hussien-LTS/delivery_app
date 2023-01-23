@@ -5,11 +5,13 @@ const salePointsModel = require("../../models").SalePoints;
 // ADD NEW SALE POINT
 const httpAddSalePointHandler = async (req, res) => {
   try {
-    if (!res.body) {
+    if (!req.body) {
       return res.status(400).json({ message: "missing body" });
     }
-    const newSalePoint = await salePointsModel.create(res.body);
+    const newSalePoint = await salePointsModel.create(req.body);
+    console.log(newSalePoint);
     if (newSalePoint) {
+      return res.status(201).json(newSalePoint);
     }
   } catch (error) {
     return res.status(500).json({ error });
@@ -19,7 +21,7 @@ const httpAddSalePointHandler = async (req, res) => {
 // GET ALL SALE POINT
 const httpGetAllSalePointHandler = async (req, res) => {
   try {
-    const salePoints = await salePointsModel.findAll({});
+    const salePoints = await salePointsModel.findAll();
     if (!salePoints) {
       return res.status(400).json({ message: "no sale Points found" });
     }
@@ -32,11 +34,16 @@ const httpGetAllSalePointHandler = async (req, res) => {
 // GET ONE SALE POINT
 const httpGetOneSalePointHandler = async (req, res) => {
   try {
-    const salePoint = await salePointsModel.findOne({
-      where: {
-        id: req.params.id,
+    const salePoint = await salePointsModel.findOne(
+      {
+        include: [{ all: true }],
       },
-    });
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
     if (!salePoint) {
       return res.status(400).json({ message: "no sale Point found" });
     }
@@ -66,11 +73,15 @@ const httpUpdateSalePointHandler = async (req, res) => {
 const httpDeleteSalePointHandler = async (req, res) => {
   try {
     const salePoint = await salePointsModel.findOne({
+      include: [{ all: true }],
+    },
+    {
       where: {
         id: req.params.id,
       },
-    });
-    if (salePoint.length) {
+    }
+  );
+    if (salePoint.employees) {
       return res.status(403).json({ message: "the sale point is not empty" });
     }
     await salePointsModel.destroy({

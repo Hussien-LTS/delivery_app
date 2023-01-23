@@ -1,16 +1,17 @@
 "use strict";
 
-const Employees = require("../models/employees.model").employees;
+const employeesModel = require("../models").Employees;
 
 // CHECK IF USER ALREADY EXIST IN DATABASE
 const existingUser = async (req, res, next) => {
   try {
-    if (!req.body.email) {
+    if (!req.body.emp_email) {
       return res.status(400).json({ status: false, message: "email req" });
     }
-    const employee = await Employees.findOne({
+    console.log(req.body.emp_email);
+    const employee = await employeesModel.findOne({
       where: {
-        email: req.body.email,
+        emp_email: req.body.emp_email,
       },
     });
     if (employee) {

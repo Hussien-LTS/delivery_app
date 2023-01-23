@@ -14,8 +14,8 @@ const httpAddCountryHandler = async (req, res) => {
 // GET ALL COUNTRIES
 const httpGetCountriesHandler = async (req, res) => {
   try {
-    const countries = await CountryModel.findByPk(1, {
-      include: [Regions],
+    const countries = await CountryModel.findAll({
+      include: [{ all: true }],
     });
     return res.status(200).json({ status: true, message: countries });
   } catch (error) {
@@ -26,7 +26,9 @@ const httpGetCountriesHandler = async (req, res) => {
 // GET ONE COUNTRIES
 const httpGetOneCountryHandler = async (req, res) => {
   try {
-    const country = await CountryModel.findByPk(req.params.id);
+    const country = await CountryModel.findByPk(req.params.id, {
+      include: [{ all: true }],
+    });
     return res.status(200).json({ status: true, message: country });
   } catch (err) {
     return res.status(500).json({ status: false, message: err });
