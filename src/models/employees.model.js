@@ -24,8 +24,8 @@ module.exports = (sequelize, DataTypes) => {
         return `${this.emp_first_name} ${this.emp_last_name}`;
       },
       set(value) {
-        throw new Error('Do not try to set the `fullName` value!');
-      }
+        throw new Error("Do not try to set the `fullName` value!");
+      },
     },
 
     emp_email: {
@@ -60,10 +60,6 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
 
-    emp_classification_code: {
-      type: DataTypes.INTEGER,
-    },
-
     emp_role: {
       // type: DataTypes.ENUM,
       // values: ["admin", "cashier", "employee"],
@@ -83,7 +79,7 @@ module.exports = (sequelize, DataTypes) => {
       //   isIn: [["0", "1"]],
       // },
       type: DataTypes.INTEGER,
-      allowNull: false, 
+      allowNull: false,
     },
 
     emp_token: {

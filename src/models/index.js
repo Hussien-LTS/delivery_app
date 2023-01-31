@@ -4,7 +4,7 @@ const pg = require("pg");
 
 const { Sequelize, DataTypes } = require("sequelize");
 
-const conString = process.env.CONSTRING
+const conString = process.env.CONSTRING;
 
 pg.defaults.ssl = false;
 const sequelize = new Sequelize(conString, {
@@ -25,15 +25,12 @@ const Clients = require("./clients.model")(sequelize, DataTypes);
 const Countries = require("./countries.model")(sequelize, DataTypes);
 const Discounts = require("./discounts.model")(sequelize, DataTypes);
 const Drivers = require("./drivers.model")(sequelize, DataTypes);
-const EmployeeClassifications = require("./employeeClassifications.model")(
+const EmpClassifications = require("./empClassifications.model")(
   sequelize,
   DataTypes
 );
 const Employees = require("./employees.model")(sequelize, DataTypes);
-const FoodClassifications = require("./foodClassifications.model")(
-  sequelize,
-  DataTypes
-);
+
 const Orders = require("./orders.model")(sequelize, DataTypes);
 const Permissions = require("./permissions.model")(sequelize, DataTypes);
 const Plans = require("./plans.model")(sequelize, DataTypes);
@@ -50,7 +47,6 @@ const SalePoints = require("./salePoints.model")(sequelize, DataTypes);
 const Subscriptions = require("./subscriptions.model")(sequelize, DataTypes);
 const Trips = require("./trips.model")(sequelize, DataTypes);
 
-
 // Countries
 // Regions
 // SalePoints
@@ -58,21 +54,21 @@ const Trips = require("./trips.model")(sequelize, DataTypes);
 
 // Countries.belongsTo(ClientLocations); // 1-1
 
-Countries.hasMany(Regions);
-Regions.belongsTo(Countries); 
+Countries.hasMany(Regions, { foreignKey: "countryId" });
+Regions.belongsTo(Countries);
 
 Countries.belongsTo(SalePoints);
-SalePoints.belongsTo(Countries); 
+SalePoints.belongsTo(Countries);
 
-SalePoints.hasMany(Employees);
-Employees.belongsTo(SalePoints); 
+SalePoints.hasMany(Employees, { foreignKey: "salePointId" });
+Employees.belongsTo(SalePoints);
 
-
-// // BuildingTypes 
-// BuildingTypes.belongsTo(ClientLocations); // 1-1
+BuildingTypes.hasOne(ClientLocations, {
+  foreignKey: "building_types_Id",
+});
+// // BuildingTypes
 
 // // ClientLocations
-// ClientLocations.hasOne(BuildingTypes, { foreignKey: "building_types_Id" });
 // ClientLocations.hasOne(Countries, { foreignKey: "country_Id" });
 // ClientLocations.belongsTo(Clients); // 1-n
 
@@ -88,7 +84,6 @@ Employees.belongsTo(SalePoints);
 // //FIXME: 1-n or n-n ??
 // // Clients.hasMany(PromoCoupons, { foreignKey: "promoCoupons_id" });
 
-
 // // Discounts
 // Discounts.hasMany(Products, { foreignKey: "discount_Id" });
 
@@ -97,8 +92,8 @@ Employees.belongsTo(SalePoints);
 // Drivers.hasMany(Orders, { foreignKey: "driver_Id" });
 // Drivers.belongsTo(SalePoints); // 1-n
 
-// // EmployeeClassifications
-// // EmployeeClassifications.hasMany(Permissions, { foreignKey: "permissions_Id" });
+// // EmpClassifications
+// // EmpClassifications.hasMany(Permissions, { foreignKey: "permissions_Id" });
 
 // // Employees
 
@@ -138,7 +133,7 @@ module.exports = {
   Countries,
   Discounts,
   Drivers,
-  EmployeeClassifications,
+  EmpClassifications,
   Employees,
   FoodClassifications,
   Orders,

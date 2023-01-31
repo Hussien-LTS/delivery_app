@@ -1,8 +1,8 @@
 "use strict";
 
 module.exports = (sequelize, DataTypes) => {
-  const EmployeeClassifications = sequelize.define("employeeClassifications", {
-    emp_code: {
+  const EmpClassifications = sequelize.define("empClassifications", {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
@@ -14,5 +14,5 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
     },
   });
-  return EmployeeClassifications;
+  return EmpClassifications;
 };

@@ -19,9 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         min: 0,
       },
     },
-    /**
-     * 
-     */
+
     order_status: {
       // type: DataTypes.ENUM,
       // values: ["waiting", "preparing", "delivering", "delivered", "cancelled"],
@@ -31,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
       //   ],
       // },
       type: DataTypes.INTEGER,
-
     },
   });
   return Orders;

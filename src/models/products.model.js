@@ -51,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
         min: 0,
       },
     },
+
     product_price_with_tax: {
       // can  add it manually
       type: DataTypes.INTEGER,
