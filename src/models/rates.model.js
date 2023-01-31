@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         max: 5,
       },
     },
-    
+
     meal_rate: {
       type: DataTypes.INTEGER,
       allowNull: false,
