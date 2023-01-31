@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+
     driver_full_name: {
       type: DataTypes.VIRTUAL,
       get() {
@@ -26,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         throw new Error("Do not try to set the `fullName` value!");
       },
     },
-    
+
     driver_img: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -132,7 +133,13 @@ module.exports = (sequelize, DataTypes) => {
       //   isIn: [["0", "1"]],
       // },
       type: DataTypes.INTEGER,
+      validate: {
+        min: 0,
+      },
+    },
 
+    driver_evaluation: {
+      type: DataTypes.INTEGER,
     },
   });
   return Driver;

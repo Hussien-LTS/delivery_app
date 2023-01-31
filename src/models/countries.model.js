@@ -7,9 +7,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
     },
-   
   });
 
- 
   return Countries;
 };
+
+/// done
